@@ -120,9 +120,9 @@ def _main(cfg, logger):
     src_originals = []
     for i in range(src_len):
         try:
-            im = np.asarray(Image.open(os.path.join(path, 'src/%d.png' % i)))
+            im = np.asarray(Image.open(os.path.join(path, 'src/%d.png' % i)).resize((1024,1024)))
         except FileNotFoundError:
-            im = np.asarray(Image.open(os.path.join(path, 'src/%d.jpg' % i)))
+            im = np.asarray(Image.open(os.path.join(path, 'src/%d.jpg' % i)).resize((1024,1024)))
         im = im.transpose((2, 0, 1))
         x = torch.tensor(np.asarray(im, dtype=np.float32), requires_grad=True).cuda() / 127.5 - 1.
         if x.shape[0] == 4:
@@ -136,9 +136,9 @@ def _main(cfg, logger):
     dst_originals = []
     for i in range(dst_len):
         try:
-            im = np.asarray(Image.open(os.path.join(path, 'dst/%d.png' % i)))
+            im = np.asarray(Image.open(os.path.join(path, 'dst/%d.png' % i)).resize((1024,1024)))
         except FileNotFoundError:
-            im = np.asarray(Image.open(os.path.join(path, 'dst/%d.jpg' % i)))
+            im = np.asarray(Image.open(os.path.join(path, 'dst/%d.jpg' % i)).resize((1024,1024)))
         im = im.transpose((2, 0, 1))
         x = torch.tensor(np.asarray(im, dtype=np.float32), requires_grad=True).cuda() / 127.5 - 1.
         if x.shape[0] == 4:
